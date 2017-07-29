@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+  - "6"
+  - "7"
+
+sudo: required
+
+services:
+  - docker
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+
+install:
+  - cd ~/build/northwesternmutual/kanali-plugin-template && npm install
+
+script:
+  - cd ~/build/northwesternmutual/kanali-plugin-template && npm test
+  - cd ~/build/northwesternmutual/kanali-plugin-template && npm run coverage
+
+after_success:
+  - cd ~/build/northwesternmutual/kanali-plugin-template && npm run coveralls

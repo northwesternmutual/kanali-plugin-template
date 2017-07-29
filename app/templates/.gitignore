@@ -1,0 +1,5 @@
+vendor/
+*.so
+kanali-plugin-<%= pluginInternal %>
+*.out
+.yo-rc.json
