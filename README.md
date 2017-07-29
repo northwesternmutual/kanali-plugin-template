@@ -2,7 +2,7 @@
 
 [![Travis branch](https://img.shields.io/travis/northwesternmutual/kanali-plugin-template/master.svg?style=flat-square)](https://travis-ci.org/northwesternmutual/kanali-plugin-template?branch=master) [![Coveralls branch](https://img.shields.io/coveralls/northwesternmutual/kanali-plugin-template/master.svg?style=flat-square)](https://coveralls.io/github/northwesternmutual/kanali-plugin-template?branch=master)
 
-> a yeoman generator for Kanali plugins
+> a Yeoman generator for Kanali plugins
 
 # Quick Start
 
@@ -13,6 +13,6 @@ $ yo kanali-plugin
 ```
 
 # What Next?
-You're plugin is now created! Reference the `README.md` found in your newly created plugin!
+Your plugin is now created! Reference the `README.md` found in your newly created plugin!
 
 
