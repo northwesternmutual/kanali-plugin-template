@@ -13,12 +13,10 @@ matrix:
     env:
     - TESTS=true
     - COVERAGE=false
-    - NPM_PUBLISH=false
   - node_js: 6
     env:
     - TESTS=true
     - COVERAGE=true
-    - NPM_PUBLISH=true
     deploy:
       provider: npm
       email: "fbgrecojr@me.com"
@@ -29,7 +27,6 @@ matrix:
     env:
     - TESTS=true
     - COVERAGE=false
-    - NPM_PUBLISH=false
 
 addons:
   apt:
@@ -47,4 +44,3 @@ script:
 
 after_success:
   - if [ "$COVERAGE" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && npm run coveralls; fi
-  # - if [ "$NPM_PUBLISH" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && bash ./travis/npm-publish.sh; fi

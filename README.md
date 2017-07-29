@@ -7,7 +7,9 @@
 # Quick Start
 
 ```sh
-// TODO
+$ npm install -g yo
+$ npm install -g generator-kanali-plugin
+$ yo kanali-plugin
 ```
 
 # What Next?
