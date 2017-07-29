@@ -1,13 +1,35 @@
-language: node_js
-
-node_js:
-  - "6"
-  - "7"
-
 sudo: required
 
-services:
-  - docker
+language: node_js
+
+env:
+  global:
+    # NPM API KEY
+    - secure: "YsE2+GmRBPJgJy+OadRfjsrEXHTpSwmbV4mabkwIiOEB8QMwv0Y/wpTdnV0Nm0Oy8hiLVOLKNXAep+2+QBzCv8bmGUYcdcs/GffPJs6CupYbJ1yVQKFckCSt+rsuqlpl/cN1BMRxfdotDZmREmbV87Vgs4tR/3+2ZdEHSRL1nS6BRIgeu39Ipyi7Mf8qzULH47K9QWYdN5fve9iA+olnEGdIAXybY3zTGw2FOYi/K43wfK+H5n7D8Ex3vYTt3kwg5IKGV4jzZfb7eF2q1qsqnnuiu8/QeCgafSTUuTSZSBLEaKSMvlCyWh3vZAEVomF+puuSHFUslJW2bdVpBFbc9Kp5TSKMtVYoNYSzCJiIX7qrwjHApURg2f/0WU8Ixcydn65IM9rOM5asnX+GjMA7FXS84AQuvMAB/pVUS5tj4/KrCEZl2zhpaMkU/u353mxEPMJXPA94JGyxjFvzE0ju4un6nVhw2UgHvZY1DCg+Ov8cWdfJxWNfyXYnsqqd1McFSVK8UVtd2F30kTahT810jfU6tuh5UmvLYzsNwSBKThTdiTUQ9uUHoiFqNGY/H++Vml+w1TTLPsUahggq95V8zQqzsUa3PQ8L4lWyvRlCHG/EzfmKiOmbiLOi560MkSh8Gyz8pYiJOfhYZBfWtSZlE+wMDt2cyvf76qjSuk0MxfA="
+
+matrix:
+  include:
+  - node_js: 5
+    env:
+    - TESTS=true
+    - COVERAGE=false
+    - NPM_PUBLISH=false
+  - node_js: 6
+    env:
+    - TESTS=true
+    - COVERAGE=true
+    - NPM_PUBLISH=true
+    deploy:
+      provider: npm
+      email: "fbgrecojr@me.com"
+      api_key: "$NPM_API_KEY"
+      on:
+        tags: true
+  - node_js: 7
+    env:
+    - TESTS=true
+    - COVERAGE=false
+    - NPM_PUBLISH=false
 
 addons:
   apt:
@@ -20,8 +42,9 @@ install:
   - cd ~/build/northwesternmutual/kanali-plugin-template && npm install
 
 script:
-  - cd ~/build/northwesternmutual/kanali-plugin-template && npm test
-  - cd ~/build/northwesternmutual/kanali-plugin-template && npm run coverage
+  - if [ "$TESTS" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && npm test; fi
+  - if [ "$TESTS" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && npm run coverage; fi
 
 after_success:
-  - cd ~/build/northwesternmutual/kanali-plugin-template && npm run coveralls
+  - if [ "$COVERAGE" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && npm run coveralls; fi
+  # - if [ "$NPM_PUBLISH" == true ]; then cd ~/build/northwesternmutual/kanali-plugin-template && bash ./travis/npm-publish.sh; fi
